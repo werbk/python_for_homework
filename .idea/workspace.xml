@@ -24,10 +24,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="test_group.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test_group.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests_group/test_group.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+            <state vertical-scroll-proportion="0.49204051" vertical-offset="0" max-vertical-offset="691">
               <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
@@ -58,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_contract.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_contract.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests_contract/test_contract.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6150507" vertical-offset="0" max-vertical-offset="867">
-              <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+              <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -83,8 +83,8 @@
       <file leaf-file-name="TestBase.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TestBase.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="799">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
+              <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -228,7 +228,7 @@
       <recent name="C:\Users\werbk\Documents\GitHub\python_for_homework\tests_contract" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.py.test in test_contract.py">
+  <component name="RunManager" selected="Python tests.py.test in test_group.py">
     <configuration default="false" name="first_task" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -471,8 +471,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.py.test in test_contract.py" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.py.test in test_group.py" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.py.test in test_group.py" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.py.test in test_contract.py" />
         <item index="2" class="java.lang.String" itemvalue="Python.tests_group" />
         <item index="3" class="java.lang.String" itemvalue="Python.tests_contract" />
         <item index="4" class="java.lang.String" itemvalue="Python.first_task" />
@@ -636,16 +636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests_group/group_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
-          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="45" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests_contract/contract_lib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2278">
@@ -656,26 +646,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TestBase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="799">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
+          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests_group/test_group.py">
+    <entry file="file://$PROJECT_DIR$/tests_group/group_lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="45" selection-end-column="22" />
           <folding>
-            <element signature="e#24#37#0" expanded="true" />
+            <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests_contract/test_contract.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6150507" vertical-offset="0" max-vertical-offset="867">
-          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+          <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+          <folding>
+            <element signature="e#24#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests_group/test_group.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49204051" vertical-offset="0" max-vertical-offset="691">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
