@@ -1,5 +1,6 @@
-import unittest
 from TestBase import BaseClass
+from selenium.webdriver.firefox.webdriver import WebDriver
+
 
 class Group:
     def __init__(self, group_name, group_header, group_footer):
@@ -8,9 +9,12 @@ class Group:
         self.group_footer = group_footer
 
 
-class GroupTestBase(BaseClass):
+class GroupBase(BaseClass):
 
-    def create_group(self, wd, Group):
+
+
+    def create_group(self, Group):
+        wd = self.wd
         wd.find_element_by_name("new").click()
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
@@ -24,12 +28,19 @@ class GroupTestBase(BaseClass):
         wd.find_element_by_name("submit").click()
 
     def delete_group(self):
+        wd = self.wd
         self.wd.find_element_by_link_text("groups").click()
         self.wd.find_element_by_css_selector("span.group").click()
         if not self.wd.find_element_by_name("selected[]").is_selected():
             self.wd.find_element_by_name("selected[]").click()
         self.wd.find_element_by_xpath("//div[@id='content']/form/input[5]").click()
 
-    def click_group_page(self, wd):
+    def click_group_page(self):
+        wd = self.wd
         wd.find_element_by_css_selector("div.msgbox").click()
         wd.find_element_by_link_text("group page").click()
+
+    def restore_group(self):
+        self.delete_group()
+        self.wd.find_element_by_link_text("Logout").click()
+        self.wd.quit()

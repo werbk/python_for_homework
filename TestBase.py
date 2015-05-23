@@ -1,4 +1,4 @@
-import unittest
+from selenium.webdriver.firefox.webdriver import WebDriver
 
 
 class Profinity:
@@ -15,11 +15,18 @@ class UserLogin:
     password = 'secret'
 
 
-class BaseClass(unittest.TestCase):
-    def open_home_page(self, wd):
+class BaseClass():
+
+    def __init__(self):
+        self.wd = WebDriver()
+        self.wd.implicitly_wait(60)
+
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://localhost/addressbook/group.php")
 
-    def login(self, wd, user_name, password):
+    def login(self, user_name, password):
+        wd = self.wd
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys("%s" % user_name)
@@ -28,3 +35,7 @@ class BaseClass(unittest.TestCase):
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys("%s" % password)
         wd.find_element_by_css_selector("input[type=\"submit\"]").click()
+
+
+
+

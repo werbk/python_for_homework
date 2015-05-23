@@ -2,13 +2,15 @@ from TestBase import BaseClass
 
 
 class ContractBase(BaseClass):
-    def add_contract(self, wd):
+    def add_contract(self):
+        wd = self.wd
         wd.find_element_by_link_text("add new").click()
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys()
 
-    def add_full_name(self, wd, first_name=None, middle_name=None, last_name=None, nickname=None):
+    def add_full_name(self, first_name=None, middle_name=None, last_name=None, nickname=None):
+        wd = self.wd
         if first_name:
             wd.find_element_by_name("firstname").click()
             wd.find_element_by_name("firstname").clear()
@@ -26,22 +28,26 @@ class ContractBase(BaseClass):
             wd.find_element_by_name("nickname").clear()
             wd.find_element_by_name("nickname").send_keys("%s" % nickname)
 
-    def add_title(self, wd, title):
+    def add_title(self, title):
+        wd = self.wd
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys("%s" % title)
 
-    def add_company(self, wd, company_name):
+    def add_company(self, company_name):
+        wd = self.wd
         wd.find_element_by_name("company").click()
         wd.find_element_by_name("company").clear()
         wd.find_element_by_name("company").send_keys("%s" % company_name)
 
-    def add_address(self, wd, address_name):
+    def add_address(self, address_name):
+        wd = self.wd
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
         wd.find_element_by_name("address").send_keys("%s" % address_name)
 
-    def add_phone_number(self, wd, home=None, mobile=None, work=None, fax=None):
+    def add_phone_number(self, home=None, mobile=None, work=None, fax=None):
+        wd = self.wd
         if home:
             wd.find_element_by_name("home").click()
             wd.find_element_by_name("home").clear()
@@ -59,7 +65,8 @@ class ContractBase(BaseClass):
             wd.find_element_by_name("fax").clear()
             wd.find_element_by_name("fax").send_keys("%s" % fax)
 
-    def add_email(self, wd, email1=None, email2=None, email3=None):
+    def add_email(self, email1=None, email2=None, email3=None):
+        wd = self.wd
         if email1:
             wd.find_element_by_name("email").click()
             wd.find_element_by_name("email").click()
@@ -75,12 +82,14 @@ class ContractBase(BaseClass):
             wd.find_element_by_name("email3").send_keys("%s" % email3)
 
 
-    def add_homepage(self, wd, homepage=None):
+    def add_homepage(self, homepage=None):
+        wd = self.wd
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys("%s" % homepage)
 
-    def add_year(self, wd):
+    def add_year(self):
+        wd = self.wd
         # in futures we can made function where we will sent date and it choose it with similar way as previous
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[3]").is_selected():
             wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[3]").click()
@@ -97,17 +106,24 @@ class ContractBase(BaseClass):
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys("1999")
 
-    def add_secondary_adress(self, wd, address):
+    def add_secondary_adress(self, address):
+        wd = self.wd
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
         wd.find_element_by_name("address2").send_keys("%s" % address)
 
-    def add_secondary_home(self, wd, phone):
+    def add_secondary_home(self, phone):
+        wd = self.wd
         wd.find_element_by_name("phone2").click()
         wd.find_element_by_name("phone2").clear()
         wd.find_element_by_name("phone2").send_keys("%s" % phone)
 
-    def add_secondary_notes(self, wd, notes):
+    def add_secondary_notes(self, notes):
+        wd = self.wd
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys("%s" % notes)
+
+    def restore_contract(self):
+        self.wd.find_element_by_link_text("Logout").click()
+        self.wd.quit()
