@@ -1,7 +1,13 @@
-from TestBase import BaseClass
+from fixture.TestBase import BaseClass
+from selenium.webdriver.firefox.webdriver import WebDriver
 
 
-class ContractBase(BaseClass):
+class ContractBase():
+    def __init__(self):
+        self.wd = WebDriver()
+        self.wd.implicitly_wait(60)
+        self.session = BaseClass(self)
+
     def add_contract(self):
         wd = self.wd
         wd.find_element_by_link_text("add new").click()
@@ -125,5 +131,4 @@ class ContractBase(BaseClass):
         wd.find_element_by_name("notes").send_keys("%s" % notes)
 
     def restore_contract(self):
-        self.wd.find_element_by_link_text("Logout").click()
         self.wd.quit()
