@@ -1,4 +1,3 @@
-from selenium.webdriver.firefox.webdriver import WebDriver
 
 
 class BaseClass():
@@ -21,6 +20,6 @@ class BaseClass():
         wd.find_element_by_name("pass").send_keys("%s" % password)
         wd.find_element_by_css_selector("input[type=\"submit\"]").click()
 
-
-
-
+    def logout(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("Logout").click()

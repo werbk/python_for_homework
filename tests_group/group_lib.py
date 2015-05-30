@@ -1,26 +1,18 @@
 from fixture.TestBase import BaseClass
 from selenium.webdriver.firefox.webdriver import WebDriver
 from fixture.variables import UserLogin
+from tests_contract.contract_lib import ContractBase
 
 
 class Group:
-    def __init__(self, group_name, group_header, group_footer):
+    def __init__(self, group_name='', group_header='', group_footer=''):
         self.group_name = group_name
         self.group_header = group_header
         self.group_footer = group_footer
 
 
-class GroupBase():
-    def __init__(self):
-        # This code duplicated in GroupBase & ContractBase, if do like says in video. How i can fix it?
-        # self.wd = WebDriver()
-        # self.wd.implicitly_wait(60)
+class GroupBase(ContractBase):
 
-
-        self.wd = WebDriver()
-        self.wd.implicitly_wait(60)
-        #self.session.login(UserLogin.name, UserLogin.password)
-        self.session = BaseClass(self)
 
     def create_group(self, Group):
         wd = self.wd
