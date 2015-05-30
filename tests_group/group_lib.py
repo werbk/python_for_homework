@@ -1,7 +1,5 @@
-from fixture.TestBase import BaseClass
-from selenium.webdriver.firefox.webdriver import WebDriver
-from fixture.variables import UserLogin
-from tests_contract.contract_lib import ContractBase
+
+from tests_contract.contract_lib import ContactBase
 
 
 class Group:
@@ -11,8 +9,7 @@ class Group:
         self.group_footer = group_footer
 
 
-class GroupBase(ContractBase):
-
+class GroupBase(ContactBase):
 
     def create_group(self, Group):
         wd = self.wd
