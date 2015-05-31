@@ -1,5 +1,3 @@
-from fixture.TestBase import BaseClass
-from selenium.webdriver.firefox.webdriver import WebDriver
 from fixture.variables import UserLogin
 from functools import wraps
 
@@ -14,6 +12,7 @@ def connection(fn):
             app.session.logout()
 
     return wrapper
+
 
 class Contract:
     def __init__(self, first_name=None, middle_name=None, last_name=None, nickname=None, title=None, company_name=None,
@@ -42,15 +41,11 @@ class Contract:
 
 
 class ContactBase():
-    def __init__(self):
-        self.wd = WebDriver()
-        self.wd.implicitly_wait(60)
-        self.session = BaseClass(self)
+    def __init__(self, app):
+        self.app = app
 
-
-
-    def create_contract(self, Contract):
-        wd = self.wd
+    def create(self, Contract):
+        wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()

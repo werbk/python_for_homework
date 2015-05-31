@@ -9,7 +9,7 @@ def test_of_add_new_valid_contact(app):
     Validation of add correct new contact with full data
     """
 
-    app.create_contract(Contract(first_name=Profinity.correct_data, last_name=Profinity.correct_data,
+    app.contact.create(Contract(first_name=Profinity.correct_data, last_name=Profinity.correct_data,
                         middle_name=Profinity.correct_data, nickname=Profinity.correct_data,
                         title=Profinity.correct_data, company_name=Profinity.correct_data,
                         address_name=Profinity.correct_data, work=Profinity.correct_phone_number,
@@ -26,6 +26,6 @@ def test_of_add_new_valid_contact_name_only(app):
     Validation of add correct new contact with only full name
     """
 
-    app.create_contract((Contract(first_name=Profinity.correct_data, last_name=Profinity.correct_data,
+    app.contact.create((Contract(first_name=Profinity.correct_data, last_name=Profinity.correct_data,
                         middle_name=Profinity.correct_data, nickname=Profinity.correct_data)))
 

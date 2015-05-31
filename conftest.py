@@ -1,12 +1,12 @@
 import pytest
 
-from tests_group.group_lib import GroupBase
+from fixture.TestBase import BaseClass
 
 
 @pytest.fixture(scope='session')
 def app(request):
-    fixture = GroupBase()
-    request.addfinalizer(fixture.restore_group)
+    fixture = BaseClass()
+    request.addfinalizer(fixture.restore)
     return fixture
 
 

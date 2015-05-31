@@ -1,7 +1,3 @@
-
-from tests_contract.contract_lib import ContactBase
-
-
 class Group:
     def __init__(self, group_name='', group_header='', group_footer=''):
         self.group_name = group_name
@@ -9,10 +5,12 @@ class Group:
         self.group_footer = group_footer
 
 
-class GroupBase(ContactBase):
+class GroupBase:
+    def __init__(self, app):
+        self.app = app
 
-    def create_group(self, Group):
-        wd = self.wd
+    def create(self, Group):
+        wd = self.app.wd
         wd.find_element_by_name("new").click()
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
@@ -26,17 +24,16 @@ class GroupBase(ContactBase):
         wd.find_element_by_name("submit").click()
 
     def delete_first_group(self):
-        wd = self.wd
-        self.wd.find_element_by_link_text("groups").click()
-        self.wd.find_element_by_css_selector("span.group").click()
-        if not self.wd.find_element_by_name("selected[]").is_selected():
-            self.wd.find_element_by_name("selected[]").click()
-        self.wd.find_element_by_xpath("//div[@id='content']/form/input[5]").click()
+        wd = self.app.wd
+        wd.find_element_by_link_text("groups").click()
+        wd.find_element_by_css_selector("span.group").click()
+        if not wd.find_element_by_name("selected[]").is_selected():
+            wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_xpath("//div[@id='content']/form/input[5]").click()
 
     def click_group_page(self):
-        wd = self.wd
+        wd = self.app.wd
         wd.find_element_by_css_selector("div.msgbox").click()
         wd.find_element_by_link_text("group page").click()
 
-    def restore_group(self):
-        self.wd.quit()
+
