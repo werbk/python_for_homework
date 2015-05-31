@@ -152,3 +152,14 @@ class ContactBase():
             wd.find_element_by_name("notes").send_keys("%s" % Contract.notes)
 
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+
+    def delete_contract(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+
+        if not wd.find_element_by_name("selected[]").is_selected():
+            wd.find_element_by_name("selected[]").click()
+
+
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+        wd.switch_to_alert().accept()

@@ -18,6 +18,7 @@ def test_of_add_new_valid_contact(app):
                         email2=Profinity.correct_email, email3=Profinity.correct_email, homepage=Profinity.correct_data,
                         add_year=True, address=Profinity.correct_data, phone=Profinity.correct_data,
                         notes=Profinity.correct_data))
+    app.contact.delete_contract()
 
 
 @connection
@@ -28,4 +29,4 @@ def test_of_add_new_valid_contact_name_only(app):
 
     app.contact.create((Contract(first_name=Profinity.correct_data, last_name=Profinity.correct_data,
                         middle_name=Profinity.correct_data, nickname=Profinity.correct_data)))
-
+    app.contact.delete_contract()

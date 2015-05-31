@@ -13,7 +13,6 @@ def test_create_group(app):
     app.group.delete_first_group()
 
 
-
 @connection
 def test_create_group_name(app):
     """Validation of correct create test group (Only group name fill up)"""
@@ -22,5 +21,14 @@ def test_create_group_name(app):
     app.group.click_group_page()
     app.group.delete_first_group()
 
+
+@connection
+def test_edit_group(app):
+    """Validation of correct edit group (all field updated)"""
+
+    app.group.create(Group(group_name='test'))
+    app.group.click_group_page()
+    app.group.edit_group(Group(group_name='testtest', group_header='testtest', group_footer='testtest'))
+    app.group.delete_first_group()
 
 
