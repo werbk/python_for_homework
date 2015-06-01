@@ -47,8 +47,13 @@ class ContactBase():
 
     def count(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_contract_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def open_contract_page(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith('addressbook/')): #and len(wd.find_elements_by_name('new')) > 0):
+            wd.find_element_by_link_text("home").click()
 
     def validation_of_contact_exist(self):
         if self.count() == 0:
@@ -57,11 +62,12 @@ class ContactBase():
 
     def edit_contract(self, Contract):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_contract_page()
+
         wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
         self.contract_field(Contract)
         wd.find_element_by_xpath("//div[@id='content']/form[1]/input[22]").click()
-        wd.find_element_by_link_text("home page").click()
+        self.open_contract_page()
 
     def contract_field(self, Contact):
         wd = self.app.wd
@@ -176,7 +182,7 @@ class ContactBase():
 
     def delete_contract(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_contract_page()
 
         if not wd.find_element_by_name("selected[]").is_selected():
             wd.find_element_by_name("selected[]").click()

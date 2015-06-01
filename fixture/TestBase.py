@@ -50,7 +50,7 @@ class SessionHelper:
 class BaseClass():
     def __init__(self):
         self.wd = WebDriver()
-        self.wd.implicitly_wait(3)
+        #self.wd.implicitly_wait(3)
         self.session = SessionHelper(self)
         self.group = GroupBase(self)
         self.contact = ContactBase(self)

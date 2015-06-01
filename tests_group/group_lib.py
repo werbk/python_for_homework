@@ -9,9 +9,14 @@ class GroupBase:
     def __init__(self, app):
         self.app = app
 
+    def open_group_page(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith('/group.php') and len(wd.find_elements_by_name('new')) > 0):
+            wd.find_element_by_link_text("groups").click()
+
     def count(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("groups").click()
+        self.open_group_page()
         return len(wd.find_elements_by_name("selected[]"))
 
     def validation_of_group_exist(self):
@@ -29,7 +34,7 @@ class GroupBase:
     def create(self, Group):
         wd = self.app.wd
 
-        wd.find_element_by_link_text("groups").click()
+        self.open_group_page()
         wd.find_element_by_name("new").click()
 
         self.group_line('group_name', Group.group_name)
@@ -40,7 +45,7 @@ class GroupBase:
 
     def delete_first_group(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("groups").click()
+        self.open_group_page()
         wd.find_element_by_css_selector("span.group").click()
         if not wd.find_element_by_name("selected[]").is_selected():
             wd.find_element_by_name("selected[]").click()
@@ -55,7 +60,7 @@ class GroupBase:
     def edit_group(self, Group):
         wd = self.app.wd
 
-        wd.find_element_by_link_text("groups").click()
+        self.open_group_page()
         if not wd.find_element_by_name("selected[]").is_selected():
             wd.find_element_by_name("selected[]").click()
         wd.find_element_by_name("edit").click()
