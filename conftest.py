@@ -1,4 +1,5 @@
 import pytest
+import logging
 
 from fixture.TestBase import BaseClass
 from fixture.variables import UserLogin

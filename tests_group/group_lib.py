@@ -1,9 +1,24 @@
+from sys import maxsize
+
+
 class Group:
-    def __init__(self, group_name=None, group_header=None, group_footer=None):
+    def __init__(self, group_name=None, group_header=None, group_footer=None, id=None):
         self.group_name = group_name
         self.group_header = group_header
         self.group_footer = group_footer
+        self.id = id
 
+    def __repr__(self):
+        return '%s:%s' %(self.id, self.group_name)
+
+    def __eq__(self, other):
+        return (self.id is None or other.id is None or self.id == other.id) and self.group_name == other.group_name
+
+    def if_or_max(self):
+        if self.id:
+            return int(self.id)
+        else:
+            return maxsize
 
 class GroupBase:
     def __init__(self, app):
@@ -71,5 +86,16 @@ class GroupBase:
 
         wd.find_element_by_name("update").click()
         wd.find_element_by_link_text("groups").click()
+
+    def get_group_list(self):
+        wd = self.app.wd
+        self.open_group_page()
+        id_group = []
+        for element in wd.find_elements_by_css_selector('span.group'):
+            text = element.text
+            id = element.find_element_by_name('selected[]').get_attribute('value')
+            id_group.append(Group(group_name=text, id=id))
+        return id_group
+
 
 

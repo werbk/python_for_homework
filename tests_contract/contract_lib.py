@@ -1,6 +1,7 @@
 from fixture.variables import UserLogin
 from functools import wraps
 from fixture.variables import Profinity
+from sys import maxsize
 
 
 def connection(fn):
@@ -18,7 +19,7 @@ def connection(fn):
 class Contact:
     def __init__(self, first_name=None, middle_name=None, last_name=None, nickname=None, title=None, company_name=None,
                  address_name=None, home=None, mobile=None, work=None, fax=None, email1=None, email2=None, email3=None,
-                 homepage=None, address=None, phone=None, notes=None, add_year=None):
+                 homepage=None, address=None, phone=None, notes=None, add_year=None, id=None, contact_name=None):
 
         self.first_name = first_name
         self.middle_name = middle_name
@@ -39,6 +40,21 @@ class Contact:
         self.phone = phone
         self.notes = notes
         self.add_year = add_year
+        self.contract_name = contact_name
+        self.id = id
+
+    def __repr__(self):
+        return '%s:%s:%s' % (self.id, self.first_name, self.last_name)
+
+    def __eq__(self, other):
+        return (self.id is None or other.id is None or self.id == other.id) and self.first_name == other.first_name and \
+                self.last_name == other.last_name
+
+    def if_or_max(self):
+        if self.id:
+            return int(self.id)
+        else:
+            return maxsize
 
 
 class ContactBase():
@@ -189,3 +205,42 @@ class ContactBase():
 
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.open_contract_page()
+        id_contact = []
+        row = 2
+        # this code does not work and i dont know how to deal with it
+        '''
+        for element in wd.find_elements_by_css_selector('tr'):
+
+        for element in wd.find_elements_by_name('entry'):
+            for element2 in element.find_elements_by_css_selector('td.center'):
+                for element3 in element2.find_elements_by_xpath('//*[@id=maintable]'):
+                    text = element.text
+            id = element.find_element_by_name('selected[]').get_attribute('value')
+                    id_contract.append(Contact(contact_name=text, id=id))
+
+
+
+            id_contact.append(Contact(id=id))'''
+
+        # in this case we have not name and lastname
+
+        '''
+        for element in wd.find_elements_by_xpath("//input[contains(@type,'checkbox')]"):
+            text = element.text'''
+
+        # so i cheated(((((
+        for element in wd.find_elements_by_name("entry"):
+            text = []
+            for column in range(2, 4):
+                text.append(wd.find_element_by_xpath("//*[@id='maintable']/tbody/tr["+str(row)+"]/td["+str(column)+"]").text)
+
+            my_id = element.find_element_by_name("selected[]").get_attribute("value")
+
+            id_contact.append(Contact(first_name=text[1], last_name=text[0], id=my_id))
+            row += 1
+
+        return id_contact
