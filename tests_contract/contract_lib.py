@@ -84,6 +84,7 @@ class ContactBase():
         self.contract_field(Contract)
         wd.find_element_by_xpath("//div[@id='content']/form[1]/input[22]").click()
         self.open_contract_page()
+        contract_cache = None
 
     def contract_field(self, Contact):
         wd = self.app.wd
@@ -187,7 +188,6 @@ class ContactBase():
             wd.find_element_by_name("notes").clear()
             wd.find_element_by_name("notes").send_keys("%s" % Contact.notes)
 
-
     def create(self, Contact):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
@@ -195,52 +195,49 @@ class ContactBase():
         self.contract_field(Contact)
 
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        contract_cache = None
 
-    def delete_contract(self):
+    def delete_contact(self):
+        self.delete_contact_by_index(0)
+
+    contract_cache = None
+
+    def get_contact_list(self):
+        if self.contract_cache is None:
+            wd = self.app.wd
+            self.open_contract_page()
+            contract_cache = []
+            row = 2
+
+            for element in wd.find_elements_by_name("entry"):
+                text = []
+                for column in range(2, 4):
+                    text.append(wd.find_element_by_xpath("//*[@id='maintable']/tbody/tr["+str(row)+"]/td["+str(column)+"]").text)
+
+                my_id = element.find_element_by_name("selected[]").get_attribute("value")
+
+                contract_cache.append(Contact(first_name=text[1], last_name=text[0], id=my_id))
+                row += 1
+
+            return contract_cache
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.open_contract_page()
 
-        if not wd.find_element_by_name("selected[]").is_selected():
-            wd.find_element_by_name("selected[]").click()
+        wd.find_elements_by_name("selected[]")[index].click()
 
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
+        contract_cache = None
 
-    def get_contact_list(self):
+    def edit_contract_by_index(self, Contract, index):
         wd = self.app.wd
         self.open_contract_page()
-        id_contact = []
-        row = 2
-        # this code does not work and i dont know how to deal with it
-        '''
-        for element in wd.find_elements_by_css_selector('tr'):
 
-        for element in wd.find_elements_by_name('entry'):
-            for element2 in element.find_elements_by_css_selector('td.center'):
-                for element3 in element2.find_elements_by_xpath('//*[@id=maintable]'):
-                    text = element.text
-            id = element.find_element_by_name('selected[]').get_attribute('value')
-                    id_contract.append(Contact(contact_name=text, id=id))
-
-
-
-            id_contact.append(Contact(id=id))'''
-
-        # in this case we have not name and lastname
-
-        '''
-        for element in wd.find_elements_by_xpath("//input[contains(@type,'checkbox')]"):
-            text = element.text'''
-
-        # so i cheated(((((
-        for element in wd.find_elements_by_name("entry"):
-            text = []
-            for column in range(2, 4):
-                text.append(wd.find_element_by_xpath("//*[@id='maintable']/tbody/tr["+str(row)+"]/td["+str(column)+"]").text)
-
-            my_id = element.find_element_by_name("selected[]").get_attribute("value")
-
-            id_contact.append(Contact(first_name=text[1], last_name=text[0], id=my_id))
-            row += 1
-
-        return id_contact
+        wd.find_elements_by_css_selector("img[alt=\"Edit\"]")[index].click()
+        #wd.find_elements_by_name()
+        self.contract_field(Contract)
+        wd.find_element_by_xpath("//div[@id='content']/form[1]/input[22]").click()
+        self.open_contract_page()
+        contract_cache = None

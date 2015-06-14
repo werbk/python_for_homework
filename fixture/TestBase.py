@@ -45,8 +45,6 @@ class SessionHelper:
         self.login(user_name, password)
 
 
-
-
 class BaseClass():
     def __init__(self):
         self.wd = WebDriver()

@@ -9,7 +9,7 @@ class Group:
         self.id = id
 
     def __repr__(self):
-        return '%s:%s' %(self.id, self.group_name)
+        return '%s:%s' % (self.id, self.group_name)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) and self.group_name == other.group_name
@@ -19,6 +19,7 @@ class Group:
             return int(self.id)
         else:
             return maxsize
+
 
 class GroupBase:
     def __init__(self, app):
@@ -57,27 +58,49 @@ class GroupBase:
         self.group_line('group_footer', Group.group_footer)
 
         wd.find_element_by_name("submit").click()
+        self.group_cache = None
 
     def delete_first_group(self):
-        wd = self.app.wd
-        self.open_group_page()
-        wd.find_element_by_css_selector("span.group").click()
-        if not wd.find_element_by_name("selected[]").is_selected():
-            wd.find_element_by_name("selected[]").click()
-        wd.find_element_by_xpath("//div[@id='content']/form/input[5]").click()
-        self.click_group_page()
+        self.delete_group_by_index(0)
 
     def click_group_page(self):
         wd = self.app.wd
         wd.find_element_by_css_selector("div.msgbox").click()
         wd.find_element_by_link_text("group page").click()
 
-    def edit_group(self, Group):
+    group_cache = None
+
+    def get_group_list(self):
+        if self.group_cache is None:
+
+            wd = self.app.wd
+            self.open_group_page()
+            self.group_cache = []
+            for element in wd.find_elements_by_css_selector('span.group'):
+                text = element.text
+                id = element.find_element_by_name('selected[]').get_attribute('value')
+                self.group_cache.append(Group(group_name=text, id=id))
+
+        return list(self.group_cache)
+
+    def select_group_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
+    def delete_group_by_index(self, index):
+        wd = self.app.wd
+        self.open_group_page()
+        self.select_group_by_index(index)
+        wd.find_element_by_name('delete').click()
+        self.click_group_page()
+        self.group_cache = None
+
+    def edit_group_by_index(self, Group, index):
         wd = self.app.wd
 
         self.open_group_page()
-        if not wd.find_element_by_name("selected[]").is_selected():
-            wd.find_element_by_name("selected[]").click()
+
+        wd.find_elements_by_name("selected[]")[index].click()
         wd.find_element_by_name("edit").click()
 
         self.group_line('group_name', Group.group_name)
@@ -86,16 +109,6 @@ class GroupBase:
 
         wd.find_element_by_name("update").click()
         wd.find_element_by_link_text("groups").click()
-
-    def get_group_list(self):
-        wd = self.app.wd
-        self.open_group_page()
-        id_group = []
-        for element in wd.find_elements_by_css_selector('span.group'):
-            text = element.text
-            id = element.find_element_by_name('selected[]').get_attribute('value')
-            id_group.append(Group(group_name=text, id=id))
-        return id_group
-
+        self.group_cache = None
 
 
