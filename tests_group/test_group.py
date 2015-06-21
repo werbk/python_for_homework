@@ -1,15 +1,28 @@
 # -*- coding: utf-8 -*-
-from group_lib import Group
-from fixture.variables import Profinity
 from random import randrange
 
+import pytest
 
-def test_create_group(app):
+from fixture.TestBase import random_string
+from group_lib import Group
+from fixture.variables import Profinity
+
+
+test_data = [
+    Group(group_name=name, group_header=header, group_footer=footer)
+    for name in ['', random_string('name', 10)]
+    for header in ['', random_string('header', 20)]
+    for footer in ['', random_string('footer', 20)]
+            ]
+
+
+
+@pytest.mark.parametrize('group', test_data, ids=[repr(x) for x in test_data])
+def test_create_group(app, group):
     """Validation of correct create test group (All field fill up)"""
 
     old_groups = app.group.get_group_list()
-    group = Group(group_name=Profinity.correct_data, group_header=Profinity.correct_data,
-                  group_footer=Profinity.correct_data)
+
     app.group.create(group)
     app.group.click_group_page()
 
@@ -18,21 +31,6 @@ def test_create_group(app):
     new_groups = app.group.get_group_list()
     old_groups.append(group)
     app.group.delete_first_group()
-    assert sorted(old_groups, key=Group.if_or_max) == sorted(new_groups, key=Group.if_or_max), 'Group list is different'
-
-
-def test_create_group_name(app):
-    """Validation of correct create test group (Only group name fill up)"""
-    old_groups = app.group.get_group_list()
-    group = Group(group_name='test')
-    app.group.create(group)
-
-    app.group.click_group_page()
-
-    assert len(old_groups)+1 == app.group.count(), 'Group does not created'
-    new_groups = app.group.get_group_list()
-    app.group.delete_first_group()
-    old_groups.append(group)
     assert sorted(old_groups, key=Group.if_or_max) == sorted(new_groups, key=Group.if_or_max), 'Group list is different'
 
 

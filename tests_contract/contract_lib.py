@@ -45,7 +45,14 @@ class Contact:
         self.id = id
 
     def __repr__(self):
-        return '%s:%s:%s' % (self.id, self.first_name, self.last_name)
+        return '%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s' % (self.id, self.first_name,
+                                                                                self.last_name, self.nickname,
+                                                                                self.title, self.company_name,
+                                                                                self.address_name, self.home,
+                                                                                self.mobile, self.work , self.fax,
+                                                                                self.email1, self.email2, self.email3,
+                                                                                self.homepage, self.address, self.phone,
+                                                                                self.notes, self.contract_name)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) and self.first_name == other.first_name and \
@@ -384,3 +391,17 @@ class ContactBase():
 
 
         return Contact(home=home_phone,work=work_phone,mobile=mobile_phone, phone=second_phone, fax = fax)
+
+
+# all data old
+'''
+Contact(first_name=Profinity.correct_data, last_name=Profinity.correct_data,
+                      middle_name=Profinity.correct_data, nickname=Profinity.correct_data,
+                      title=Profinity.correct_data, company_name=Profinity.correct_data,
+                      address_name=Profinity.correct_data, work=Profinity.correct_phone_number,
+                      fax=Profinity.correct_phone_number, home=Profinity.correct_phone_number,
+                      mobile=Profinity.correct_phone_number, email1=Profinity.correct_email,
+                      email2=Profinity.correct_email, email3=Profinity.correct_email, homepage=Profinity.correct_data,
+                      add_year=True, address=Profinity.correct_data, phone=Profinity.correct_data,
+                      notes=Profinity.correct_data)
+'''

@@ -1,4 +1,6 @@
+import random
 import re
+import string
 from selenium.webdriver.firefox.webdriver import WebDriver
 from tests_group.group_lib import GroupBase
 from tests_contract.contract_lib import ContactBase
@@ -75,3 +77,8 @@ class BaseClass():
 
 def clear(info):
     return re.sub('[() -]', '', info)
+
+
+def random_string(prefix, maxlen):
+    symbols = string.ascii_letters + string.digits + ' ' #+ string.punctuation
+    return prefix + ''.join([random.choice(symbols) for i in range(random.randrange(maxlen))])
