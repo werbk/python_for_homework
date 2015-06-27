@@ -3,7 +3,7 @@ import re
 import string
 from selenium import webdriver
 from tests_group.group_lib import GroupBase
-from tests_contract.contract_lib import ContactBase
+from tests_contract.contact_lib import ContactBase
 
 
 class SessionHelper:

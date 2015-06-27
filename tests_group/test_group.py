@@ -4,8 +4,8 @@ from random import randrange
 import pytest
 
 from fixture.TestBase import random_string
-from group_lib import Group
 from fixture.variables import Profinity
+from tests_group.group_helper import Group
 
 
 test_data = [

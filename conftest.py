@@ -1,28 +1,37 @@
 import pytest
 import logging
+import json
+import os.path
 
 from fixture.TestBase import BaseClass
 from fixture.variables import UserLogin
 
 
 fixture = None
+target = None
 
 
 @pytest.fixture
 def app(request):
     global fixture
+    global target
+
     browser = request.config.getoption('--browser')
-    url = request.config.getoption('--baseUrl')
-    loginu = request.config.getoption('--loginu')
-    loginp = request.config.getoption('--loginp')
-    if fixture is None:
-        fixture = BaseClass(browser=browser, base_url = url)
 
-    else:
-        if not fixture.is_valid():
-            fixture = BaseClass(browser=browser, base_url = url)
+    if target is None:
+        config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.config.getoption('--target'))
+        with open(config_file) as file:
+            target = json.load(file)
 
-    fixture.session.ensure_login(user_name=loginu, password=loginp)
+
+    #url = request.config.getoption('--baseUrl')
+    #login_user = request.config.getoption('--login_user')
+    #login_password = request.config.getoption('--login_password')
+
+    if fixture is None or not fixture.is_valid():
+        fixture = BaseClass(browser=browser, base_url=target['baseUrl'])
+
+    fixture.session.ensure_login(user_name=target['username'], password=target['password'])
     return fixture
 
 @pytest.fixture(scope='session', autouse=True)
@@ -38,8 +47,8 @@ def stop(request):
 def pytest_addoption(parser):
     default_login_user = [UserLogin.name, UserLogin.password]
     parser.addoption('--browser', action='store', default='firefox')
-    parser.addoption('--baseUrl', action='store', default='http://localhost/addressbook/')
+    parser.addoption('--target', action='store', default='target.json') #'http://localhost/addressbook/')
 
-    # i believe that it possible do in 1 line but i don't know how to in 1 Login take to parameter at same time
-    parser.addoption('--loginu', action='store', default=default_login_user[0])
-    parser.addoption('--loginp', action='store', default=default_login_user[1])
+    # i believe that it possible do in 1 line but i don't know how two in 1 Login take to parameter at same time
+    #parser.addoption('--loginu', action='store', default=default_login_user[0])
+    #parser.addoption('--loginp', action='store', default=default_login_user[1])

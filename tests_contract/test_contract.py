@@ -4,8 +4,8 @@ import pytest
 
 from fixture.TestBase import clear
 from fixture.variables import Profinity
-from contract_lib import Contact
 from fixture.TestBase import random_string
+from tests_contract.contact_helper import Contact
 
 
 test_data = [
