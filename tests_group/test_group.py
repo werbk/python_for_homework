@@ -3,17 +3,9 @@ from random import randrange
 
 import pytest
 
-from fixture.TestBase import random_string
 from fixture.variables import Profinity
 from tests_group.group_helper import Group
-
-
-test_data = [
-    Group(group_name=name, group_header=header, group_footer=footer)
-    for name in ['', random_string('name', 10)]
-    for header in ['', random_string('header', 20)]
-    for footer in ['', random_string('footer', 20)]
-            ]
+from data.add_group import constant as test_data
 
 
 
