@@ -1,68 +1,44 @@
 [
   {
+    "py/object": "tests_group.group_helper.Group", 
     "group_footer": "", 
-    "group_header": "", 
+    "group_name": "", 
     "id": null, 
-    "group_name": ""
+    "group_header": ""
   }, 
   {
-    "group_footer": "footer6s", 
-    "group_header": "header nssk", 
+    "py/object": "tests_group.group_helper.Group", 
+    "group_footer": "footer", 
+    "group_name": "namec9YaWRe", 
     "id": null, 
-    "group_name": "nameaVxXGQ3dH"
+    "group_header": "header0Oasv2Id"
   }, 
   {
-    "group_footer": "footerqT8wPXwNU", 
-    "group_header": "header6P", 
+    "py/object": "tests_group.group_helper.Group", 
+    "group_footer": "footerG5G0l", 
+    "group_name": "nameHH", 
     "id": null, 
-    "group_name": "name"
+    "group_header": "header"
   }, 
   {
-    "group_footer": "footerQZeIuN4", 
-    "group_header": "headernLpRoiv0", 
+    "py/object": "tests_group.group_helper.Group", 
+    "group_footer": "footergQLy9wI", 
+    "group_name": "nameZ YgD", 
     "id": null, 
-    "group_name": "namelj"
+    "group_header": "headerrFPnZgQ5h"
   }, 
   {
-    "group_footer": "footervXuU", 
-    "group_header": "headerDf0zw1SA", 
+    "py/object": "tests_group.group_helper.Group", 
+    "group_footer": "footerfC7xu", 
+    "group_name": "nameyYCltQbZp", 
     "id": null, 
-    "group_name": "nameKhOly"
+    "group_header": "header"
   }, 
   {
-    "group_footer": "footer6 k", 
-    "group_header": "headerluIFwYL", 
+    "py/object": "tests_group.group_helper.Group", 
+    "group_footer": "footersK", 
+    "group_name": "namee8IfJ", 
     "id": null, 
-    "group_name": "nameWmLD2l"
-  }, 
-  {
-    "group_footer": "footerW3", 
-    "group_header": "headergtgV5lZ0", 
-    "id": null, 
-    "group_name": "nameH4VPraq"
-  }, 
-  {
-    "group_footer": "footernX8sB4r7Z", 
-    "group_header": "headerKTL3iCO", 
-    "id": null, 
-    "group_name": "nameIMr"
-  }, 
-  {
-    "group_footer": "footerpI", 
-    "group_header": "headerFszknc3", 
-    "id": null, 
-    "group_name": "nameXOQjx9"
-  }, 
-  {
-    "group_footer": "footerM cMCrz", 
-    "group_header": "header6WtyjSq9", 
-    "id": null, 
-    "group_name": "nameYdXa"
-  }, 
-  {
-    "group_footer": "footerLDUOhjCIg", 
-    "group_header": "headerXtlgxQ2", 
-    "id": null, 
-    "group_name": "nameF5VDVNE4f"
+    "group_header": "headerb 97PXHTO"
   }
 ]

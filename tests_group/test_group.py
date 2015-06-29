@@ -5,14 +5,15 @@ import pytest
 
 from fixture.variables import Profinity
 from tests_group.group_helper import Group
-from data.add_group import constant as test_data
+from data.groups import test_data
 
 
 
-@pytest.mark.parametrize('group', test_data, ids=[repr(x) for x in test_data])
-def test_create_group(app, group):
+#@pytest.mark.parametrize('group', test_data, ids=[repr(x) for x in test_data])
+
+def test_create_group(app, json_groups):
     """Validation of correct create test group (All field fill up)"""
-
+    group = json_groups
     old_groups = app.group.get_group_list()
 
     app.group.create(group)

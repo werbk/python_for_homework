@@ -1,8 +1,9 @@
 import pytest
 import logging
 import json
+import jsonpickle
 import os.path
-
+import importlib
 from fixture.TestBase import BaseClass
 from fixture.variables import UserLogin
 
@@ -52,3 +53,20 @@ def pytest_addoption(parser):
     # i believe that it possible do in 1 line but i don't know how two in 1 Login take to parameter at same time
     #parser.addoption('--loginu', action='store', default=default_login_user[0])
     #parser.addoption('--loginp', action='store', default=default_login_user[1])
+
+
+def load_from_module(module):
+    return importlib.import_module("data.%s" % module).test_data
+
+def load_from_json(file):
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data/%s.json' % file)) as f:
+        return jsonpickle.decode(f.read())
+
+def pytest_generate_tests(metafunc):
+    for fixture in metafunc.fixturenames:
+        if fixture.startswith("data_"):
+            testdata = load_from_module(fixture[5:])
+            metafunc.parametrize(fixture, testdata, ids=[str(x) for x in testdata])
+        elif fixture.startswith("json_"):
+            testdata = load_from_json(fixture[5:])
+            metafunc.parametrize(fixture, testdata, ids=[str(x) for x in testdata])
