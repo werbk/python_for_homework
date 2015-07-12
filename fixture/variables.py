@@ -10,3 +10,6 @@ class Profinity:
     correct_data = 'test'
     symbol = """!"#$%&'()*+,-./09:;<=>?@[]^_`{}|~ """
     correct_phone_number = +3888091234521
+
+class DbOrUi:
+    db=True

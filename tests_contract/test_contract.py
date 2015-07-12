@@ -24,7 +24,7 @@ def test_of_add_new_valid_contact(app, json_contacts):
     app.contact.delete_contact()
     old_contact_list.append(contact)
     # this validation does not work again
-    #assert sorted(old_contact_list, key=Contact.if_or_max) == sorted(new_contact_list, key=Contact.if_or_max)
+    assert sorted(old_contact_list, key=Contact.if_or_max) == sorted(new_contact_list, key=Contact.if_or_max)
 
 
 def test_of_delete_contract(app):

@@ -199,7 +199,7 @@ class ContactBase():
                 if adress:
                     h = adress[0]
 
-                contract_cache.append(Contact(first_name=cells[1].text, last_name=cells[2].text, id=my_id, home=a,
+                contract_cache.append(Contact(first_name=cells[1].text, last_name=cells[2].text, id=int(my_id), home=a,
                                               mobile = b, work = c, phone = d, email1 = e, email2= f,
                                               email3 = g , address = h))
 
@@ -245,9 +245,9 @@ class ContactBase():
                 if adress:
                     h = adress[0]
 
-                contract_cache.append(Contact(first_name=cells[1].text, last_name=cells[2].text, id=my_id, home=a,
-                                              mobile = b, work = c, phone = d, email1 = e, email2= f,
-                                              email3 = g , address = h))
+                contract_cache.append(Contact(first_name=cells[2].text, last_name=cells[1].text, id=int(my_id), home=a,
+                                              mobile=b, work=c, phone=d, email1=e, email2=f,
+                                              email3=g , address=h))
 
             return contract_cache
 
