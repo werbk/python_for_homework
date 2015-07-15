@@ -2,6 +2,7 @@ import mysql.connector
 from tests_contract.contact_lib import Contact
 
 connection = mysql.connector.connect(host='127.0.0.1', database='addressbook', user='root', password='')
+
 '''try:
     cursor = connection.cursor()
     cursor.execute('select * from group_list')

@@ -6,11 +6,12 @@ from fixture.TestBase import clear
 from fixture.variables import Profinity
 from tests_contract.contact_helper import Contact
 from data.contacts import constant as test_data
+from tests_contract.validate import validate_contact_list
 
 
 
 #@pytest.mark.parametrize('contact', test_data, ids=[repr(x) for x in test_data])
-def test_of_add_new_valid_contact(app, json_contacts):
+def test_of_add_new_valid_contact(app, db, json_contacts):
     """
     Validation of add correct new contact with full data
     """
@@ -21,13 +22,14 @@ def test_of_add_new_valid_contact(app, json_contacts):
 
     assert len(old_contact_list)+1 == app.contact.count()
     new_contact_list = app.contact.get_contact_list()
-    app.contact.delete_contact()
+
     old_contact_list.append(contact)
     # this validation does not work again
-    assert sorted(old_contact_list, key=Contact.if_or_max) == sorted(new_contact_list, key=Contact.if_or_max)
+    validate_contact_list(app, db, old_contact_list, new_contact_list)
 
+    app.contact.delete_contact()
 
-def test_of_delete_contract(app):
+def test_of_delete_contract(app, db):
     """
     Validation of  delete contract
     """
@@ -41,10 +43,12 @@ def test_of_delete_contract(app):
 
     new_contact_list = app.contact.get_contact_list()
     old_contact_list[index:index+1] = []
-    assert old_contact_list == new_contact_list
+
+    validate_contact_list(app, db, old_contact_list, new_contact_list, validate_ui=True)
+    #assert old_contact_list == new_contact_list
 
 
-def test_of_edit_contract(app):
+def test_of_edit_contract(app, db):
     """
     Validation of edit contract
     """
@@ -59,10 +63,10 @@ def test_of_edit_contract(app):
 
     assert len(old_contact_list) == app.contact.count()
     new_contact_list = app.contact.get_contact_list()
-    app.contact.delete_contact()
 
     old_contact_list[index] = contact
-    assert sorted(old_contact_list, key=Contact.if_or_max) == sorted(new_contact_list, key=Contact.if_or_max)
+    validate_contact_list(app, db, old_contact_list, new_contact_list)
+    app.contact.delete_contact()
 
 def test_phones_on_home_page(app):
     """
@@ -81,7 +85,6 @@ def test_phones_on_home_page(app):
     assert contact_from_hp[0].email2 == clear(contact_from_ep.email2)
     assert contact_from_hp[0].email3 == clear(contact_from_ep.email3)
     assert contact_from_hp[0].address == clear(contact_from_ep.address)
-
 
 
 def test_phones_on_contact_view_page(app):
