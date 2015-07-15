@@ -1,7 +1,7 @@
 from tests_group.group_helper import Group
 
 
-def validate_group_list(db, new_groups, old_groups, validate=False):
+def validate_group_list(db, new_groups, old_groups, validate=True):
     ui_list = new_groups
     def clean(group):
         return Group(id=group.id, group_name=group.group_name.strip())

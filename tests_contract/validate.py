@@ -2,8 +2,8 @@
 from tests_contract.contact_helper import Contact
 
 
-def validate_contact_list(app, db, old_contact_list, new_contact_list, validate_ui=False):
-    ua_list = app.contact.get_contact_list_without_none()
+def validate_contact_list(new_contact_list_without, db, old_contact_list, new_contact_list, validate_ui=True):
+    ua_list = new_contact_list_without #app.contact.get_contact_list_without_none()
 
     def clean(contact):
         return Contact(id=contact.id, first_name=contact.first_name.strip(), last_name=contact.last_name.strip(), home=contact.home.strip(),

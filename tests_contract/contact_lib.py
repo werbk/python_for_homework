@@ -24,6 +24,7 @@ class ContactBase():
                         middle_name=Profinity.correct_data, nickname=Profinity.correct_data,
                         phone=Profinity.correct_phone_number, work=Profinity.correct_phone_number,
                         home=Profinity.correct_phone_number,mobile=Profinity.correct_phone_number)))
+        self.contract_cache = None
 
     def edit_contract(self, Contract):
         wd = self.app.wd
@@ -33,7 +34,7 @@ class ContactBase():
         self.contract_field(Contract)
         wd.find_element_by_xpath("//div[@id='content']/form[1]/input[22]").click()
         self.open_contract_page()
-        contract_cache = None
+        self.contract_cache = None
 
     def contract_field(self, Contact):
         wd = self.app.wd
@@ -152,18 +153,18 @@ class ContactBase():
         self.contract_field(Contact)
 
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
-        contract_cache = None
+        self.contract_cache = None
 
     def delete_contact(self):
         self.delete_contact_by_index(0)
 
-    contract_cache = None
+    contract_cache=None
 
     def get_contact_list(self):
         if self.contract_cache is None:
             wd = self.app.wd
             self.open_contract_page()
-            contract_cache = []
+            self.contract_cache = []
             for row in wd.find_elements_by_name('entry'):
                 cells = row.find_elements_by_tag_name('td')
                 my_id = cells[0].find_element_by_tag_name('input').get_attribute('value')
@@ -199,17 +200,17 @@ class ContactBase():
                 if adress:
                     h = adress[0]
 
-                contract_cache.append(Contact(first_name=cells[1].text, last_name=cells[2].text, id=int(my_id), home=a,
+                self.contract_cache.append(Contact(first_name=cells[2].text, last_name=cells[1].text, id=int(my_id), home=a,
                                               mobile = b, work = c, phone = d, email1 = e, email2= f,
                                               email3 = g , address = h))
 
-            return contract_cache
+            return list(self.contract_cache)
 
     def get_contact_list_without_none(self):
         if self.contract_cache is None:
             wd = self.app.wd
             self.open_contract_page()
-            contract_cache = []
+            self.contract_cache = []
             for row in wd.find_elements_by_name('entry'):
                 cells = row.find_elements_by_tag_name('td')
                 my_id = cells[0].find_element_by_tag_name('input').get_attribute('value')
@@ -245,11 +246,58 @@ class ContactBase():
                 if adress:
                     h = adress[0]
 
-                contract_cache.append(Contact(first_name=cells[2].text, last_name=cells[1].text, id=int(my_id), home=a,
+                self.contract_cache.append(Contact(first_name=cells[2].text, last_name=cells[1].text, id=int(my_id), home=a,
                                               mobile=b, work=c, phone=d, email1=e, email2=f,
                                               email3=g , address=h))
 
-            return contract_cache
+            return list(self.contract_cache)
+
+    def get_contact_list_special_case(self):
+
+        wd = self.app.wd
+        self.open_contract_page()
+        self.contract_cache = []
+        for row in wd.find_elements_by_name('entry'):
+            cells = row.find_elements_by_tag_name('td')
+            my_id = cells[0].find_element_by_tag_name('input').get_attribute('value')
+            all_phones = cells[5].text.splitlines()
+            all_email = cells[4].text.splitlines()
+            adress = cells[3].text.splitlines()
+
+            a = ''
+            b = ''
+            c = ''
+            d = ''
+            e = ''
+            f = ''
+            g = ''
+            h = ''
+            if all_phones:
+                if len(all_phones)>0 and all_phones[0]:
+                    a=all_phones[0]
+                if len(all_phones)>1 and all_phones[1]:
+                    b=all_phones[1]
+                if len(all_phones)>2 and all_phones[2]:
+                   c = all_phones[2]
+                if len(all_phones)>3 and all_phones[3]:
+                 d = all_phones[3]
+
+            if all_email:
+                if len(all_email)>0 and all_email[0]:
+                    e = all_email[0]
+                if len(all_email)>1 and all_email[1]:
+                    f = all_email[1]
+                if len(all_email)>2 and all_email[2]:
+                    g = all_email[2]
+            if adress:
+                h = adress[0]
+
+            self.contract_cache.append(Contact(first_name=cells[2].text, last_name=cells[1].text, id=int(my_id), home=a,
+                                          mobile=b, work=c, phone=d, email1=e, email2=f,
+                                          email3=g , address=h))
+
+        return list(self.contract_cache)
+
 
     def delete_contact_by_index(self, index):
         wd = self.app.wd
@@ -259,7 +307,7 @@ class ContactBase():
 
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
-        contract_cache = None
+        self.contract_cache = None
 
     def edit_contract_by_index(self, Contract, index):
         wd = self.app.wd
@@ -269,7 +317,7 @@ class ContactBase():
         self.contract_field(Contract)
         wd.find_element_by_xpath("//div[@id='content']/form[1]/input[22]").click()
         self.open_contract_page()
-        contract_cache = None
+        self.contract_cache = None
 
     def open_contact_to_edit_by_index(self, index):
         wd = self.app.wd
