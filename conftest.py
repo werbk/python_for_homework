@@ -52,11 +52,16 @@ def stop(request):
     request.addfinalizer(fin)
     return fixture
 
+@pytest.fixture
+def check_ui(request):
+    return request.config.getoption('--check_ui')
+
 
 def pytest_addoption(parser):
     default_login_user = [UserLogin.name, UserLogin.password]
     parser.addoption('--browser', action='store', default='firefox')
     parser.addoption('--target', action='store', default='target.json') #'http://localhost/addressbook/')
+    parser.addoption('--check_ui', action='store_true')
 
     # i believe that it possible do in 1 line but i don't know how two in 1 Login take to parameter at same time
     #parser.addoption('--loginu', action='store', default=default_login_user[0])

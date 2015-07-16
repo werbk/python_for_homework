@@ -380,6 +380,36 @@ class ContactBase():
         return Contact(home=home_phone,work=work_phone,mobile=mobile_phone, phone=second_phone, fax = fax)
 
 
+
+
+
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.open_contract_page()
+        wd.find_element_by_id("%s" % id).click()
+
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        self.contract_cache = None
+
+    def edit_contact_by_id(self, Contact, id):
+
+        wd = self.app.wd
+        self.open_contract_page()
+
+        wd.find_element_by_id("%s" % id).click()
+        wd.find_element_by_xpath("//a[contains(@href,'edit.php?id')]").click()
+
+        self.contract_field(Contact)
+        wd.find_element_by_xpath("//div[@id='content']/form[1]/input[22]").click()
+        self.open_contract_page()
+        self.contract_cache = None
+
+
+
+
+
+
 # all data old
 '''
 Contact(first_name=Profinity.correct_data, last_name=Profinity.correct_data,

@@ -1,5 +1,7 @@
 from tests_group.group_helper import Group
 
+def clean(group):
+        return Group(id=group.id, group_name=group.group_name.strip())
 
 class GroupBase:
     def __init__(self, app):
@@ -91,4 +93,30 @@ class GroupBase:
         wd.find_element_by_link_text("groups").click()
         self.group_cache = None
 
+    def delete_group_by_id(self, id):
+        wd = self.app.wd
+        self.open_group_page()
+        self.select_group_by_id(id)
+        wd.find_element_by_name('delete').click()
+        self.click_group_page()
+        self.group_cache = None
 
+    def select_group_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
+
+    def edit_group_by_id(self, Group, group_id):
+        wd = self.app.wd
+        self.open_group_page()
+        self.select_group_by_id(group_id)
+
+        wd.find_element_by_xpath("//*[@id='content']//*[@name='edit'][1]").click()
+
+        self.group_line('group_name', Group.group_name)
+        self.group_line('group_header', Group.group_header)
+        self.group_line('group_footer', Group.group_footer)
+
+        wd.find_element_by_name("update").click()
+        wd.find_element_by_link_text("groups").click()
+        self.group_cash = None

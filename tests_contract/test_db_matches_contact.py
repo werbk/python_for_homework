@@ -10,5 +10,5 @@ def test_contact_list(app, db):
                        mobile=contact.mobile.strip(), work=contact.work.strip(), phone=contact.phone.strip(), email1=contact.email1.strip(), email2=contact.email2.strip(),
                        email3=contact.email3.strip(), address=contact.address.strip())
 
-    db_list = map(clean, db.get_contact_list_db())
+    db_list = map(clean, db.get_contact_list())
     assert sorted(ua_list, key=Contact.if_or_max) == sorted(db_list, key=Contact.if_or_max)
