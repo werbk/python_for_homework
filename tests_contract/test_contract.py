@@ -27,7 +27,7 @@ def test_of_add_new_valid_contact(app, db, check_ui, json_contacts ):
     old_contact_list.append(contact)
     # this validation does not work again
     validate_contact_list(app, old_contact_list, new_contact_list, check_ui)
-    app.contact.delete_contact()
+    #app.contact.delete_contact()
 
 def test_of_delete_contract(app, db, check_ui):
     """
