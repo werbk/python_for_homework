@@ -24,7 +24,7 @@ def test_create_group(app, db, check_ui, json_groups):
     old_groups.append(group)
 
     validate_group_list(app, new_groups, old_groups, check_ui)
-    app.group.delete_first_group()
+    #app.group.delete_first_group()
 
 
 def test_edit_group(app, db, check_ui):

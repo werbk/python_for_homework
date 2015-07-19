@@ -45,7 +45,7 @@ def test_check_data_on_home_page(app, db):
     assert sorted(list(map(cleann, home_page_contacts)), key=Contact.if_or_max) == sorted(list(map(cleann, db.get_contact_list())), key=Contact.if_or_max)
 
 
-# or i should do something like that? 
+# or i should do something like that?
 def _test_check_data_on_view_page(app, db):
     """Validation of all data on view page"""
 

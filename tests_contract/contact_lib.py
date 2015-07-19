@@ -1,5 +1,7 @@
 import re
 
+from selenium.webdriver.support.ui import Select
+
 from fixture.variables import Profinity
 from tests_contract.contact_helper import Contact
 
@@ -8,6 +10,7 @@ def cleann(contact):
         return Contact(id=contact.id, first_name=contact.first_name.strip(), last_name=contact.last_name.strip(), home=contact.home.strip(),
                        mobile=contact.mobile.strip(), work=contact.work.strip(), phone=contact.phone.strip(), email1=contact.email1.strip(), email2=contact.email2.strip(),
                        email3=contact.email3.strip(), address=contact.address.strip())
+
 
 class ContactBase():
     def __init__(self, app):
@@ -411,9 +414,26 @@ class ContactBase():
         self.contract_cache = None
 
 
+    def add_group_field(self, contact, group):
+        wd = self.app.wd
+        self.open_contract_page()
+
+        wd.find_element_by_css_selector("input[value='%s']" % contact.id).click()
+        #wd.find_element_by_id("%s" % contact.id).click()
+        #wd.find_element_by_xpath("//a[contains(@href,'edit.php?id')]").click()
+
+        select = Select(wd.find_element_by_name("to_group"))
+        select.select_by_visible_text(group.group_name)
+        wd.find_element_by_name("add").click()
 
 
-
+    def delete_from_group_field(self, contact, group):
+        wd = self.app.wd
+        self.open_contract_page()
+        select = Select(wd.find_element_by_name("group"))
+        select.select_by_visible_text(group.group_name)
+        wd.find_element_by_css_selector("input[value='%s']" % contact.id).click()
+        wd.find_element_by_name("remove").click()
 
 # all data old
 '''
@@ -427,3 +447,5 @@ Contact(first_name=Profinity.correct_data, last_name=Profinity.correct_data,
                       add_year=True, address=Profinity.correct_data, phone=Profinity.correct_data,
                       notes=Profinity.correct_data)
 '''
+
+

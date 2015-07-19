@@ -5,6 +5,7 @@ import jsonpickle
 import os.path
 import importlib
 
+from fixture.orm import ORMFixture
 from fixture.db import DbFixture
 from fixture.TestBase import BaseClass
 from fixture.variables import UserLogin
@@ -55,6 +56,16 @@ def stop(request):
 @pytest.fixture
 def check_ui(request):
     return request.config.getoption('--check_ui')
+
+@pytest.fixture(scope="session")
+def orm(request):
+    orm_config = load_config(request.config.getoption("--target"))['db']
+    ormfixture = ORMFixture(host=orm_config['host'], name=orm_config['name'], user=orm_config['user'],
+                          password=orm_config['password'])
+    def fin():
+        ormfixture.destroy()
+    request.addfinalizer(fin)
+    return ormfixture
 
 
 def pytest_addoption(parser):

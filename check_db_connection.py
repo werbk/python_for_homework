@@ -6,7 +6,7 @@ from fixture.orm import ORMFixture
 db = ORMFixture(host='127.0.0.1', name='addressbook', user='root', password='')
 
 try:
-    groups = db.get_contact_list()
+    groups = db.get_contacts_in_groups()
     for group in groups:
         print group
     print len(groups)
