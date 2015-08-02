@@ -1,14 +1,21 @@
 {
-  "web" : {
-  "baseUrl": "http://localhost/addressbook/",
-  "username": "admin",
-  "password": "secret"},
-  "db": {
+  "web":{
+    "baseUrl": "http://localhost/mantisbt-1.2.19"
+  },
+  "webadmin":{
+    "username": "administrator",
+    "password": "root"
+  },
+  "ftp": {
     "host": "localhost",
-    "name": "addressbook",
-    "user": "root",
-    "password": ""
-
-
+    "username": "mantis",
+    "password": "mantis"
+  },
+  "james": {
+    "host": "localhost",
+    "port": 4555,
+    "username": "root",
+    "password": "root"
   }
 }
+

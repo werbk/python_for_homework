@@ -1,16 +1,14 @@
-import random
-import re
-import string
-
 from selenium import webdriver
 
+from test.project_lib import ProjectMantisHelper
 from fixture.session_helper import SessionHelper
-from tests_group.group_lib import GroupBase
-from tests_contract.contact_lib import ContactBase
+from fixture.james import JamesHelper
+from fixture.mail import MailHelper
+from fixture.signup import SignupHelper
+from fixture.soap import SoapHelper
 
-
-class BaseClass():
-    def __init__(self, browser, base_url):
+class Application():
+    def __init__(self, browser, config):
         if browser == 'firefox':
             self.wd = webdriver.Firefox()
         elif browser == 'chrome':
@@ -20,11 +18,14 @@ class BaseClass():
         else:
             raise ValueError('Unrecognize browser %s' % browser)
 
-        #self.wd.implicitly_wait(3)
         self.session = SessionHelper(self)
-        self.group = GroupBase(self)
-        self.contact = ContactBase(self)
-        self.base_url = base_url
+        self.project = ProjectMantisHelper(self)
+        self.config = config
+        self.base_url = config['web']['baseUrl']
+        self.james = JamesHelper(self)
+        self.signup = SignupHelper(self)
+        self.mail = MailHelper(self)
+        self.soap = SoapHelper(self)
 
     def is_valid(self):
         try:
@@ -40,12 +41,3 @@ class BaseClass():
     def restore(self):
         wd = self.wd
         wd.quit()
-
-
-def clear(info):
-    return re.sub('[() -]', '', info)
-
-
-def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + ' ' #+ string.punctuation
-    return prefix + ''.join([random.choice(symbols) for i in range(random.randrange(maxlen))])
